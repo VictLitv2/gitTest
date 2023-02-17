@@ -1,0 +1,83 @@
+# Git Basics (commit, diff, branches)
+
+1.echo "1" >> abc.txt
+2.red color
+3.red color
+4.green color ,also in Pycharm green color
+5.echo "2" >> abc.txt
+6.no - the same red color.difference is - "modified:" text added before abc.txt
+7.git diff main
+8.git diff --staged prints nothing because before we just modified working tree ,
+    no differences between stage and HEAD commit (last revision)
+    cause before we bought last change to commits area with commit command
+9.Fatal error cause there is no branch in local repository and no file existing with such name
+    that can be second arg of git diff
+10.git add abc.txt
+11.git diff prints nothing cause no difference between working tree and stage at this step
+12.git diff main --staged
+13.echo "3" >> abc.txt
+14.No.Not same result.git diff main prints 3 added in the end file ,Because It shows differences between working tree and branch,
+   while  git diff --staged shows what is stored in index(stage) comparing to last revision in branch main
+15.Cause git status shows next 2 changes  1)in index,we add sting "2" without commit ; 2) changes in working tree we add "3" without adding to index
+16.git reset --hard HEAD  or git add abc1.txt && reset --hard HEAD (if  abc1.txt was just in working tree since it have been created)
+
+# Resolve conflicts
+
+1.git branch
+2.git checkout -b feature/lambda_migration
+3.git merge feature/version1
+4.abc.txt from main branch
+5.For git merge from Pycharm UI
+   1.After clicking Merge conflicts resolving mode(mergetool editor)is open
+   2.Just 2 difference after clicking All
+   3.Shown that commit on Left side from John,commit on right side from Narayan
+   4.By clicking Arrows link on left side ,then right Total 2 differences afte Using All(automatically resolving
+   5.After accepting change of Narayan It is possible to see green V near top Right corner
+6. Yes abc.txt versioned from main branch cause we made checkout new branch from main
+
+# Cherry picking
+
+1.git checkout main&&git checkout -b feature/lambda_migration2
+2.By standing on/selecting feature folder in Git->local menu It is possible to continue selection of commits from all branches
+that belongs to that folder so 2 these branches are selectable
+3.
+    1.Select "use correct lock type in reconnect()" commit and click "cherry pick"
+    2.Select "Restrict the extensions that can be disabled"
+        order will be as they were added  in feature/lambda_migration
+4. Files .env and config.json
+5.Yes,sure.It is very important to save order ,for example when commit were on the same files.
+Otherwise latest changes within it will be lost
+
+
+# Changes in working tree and switch branches
+
+1.git branch should show feature/lambda_migration2 selected
+2.echo "123">>take.txt&&echo "12">>take.txt
+3.error: The following untracked working tree files would be overwritten by checkout:
+	take.txt
+    Please move or remove them before you switch branches.With stash save command before We could make above mentioned checkout command
+4. We re at risk to lose changes from  feature/lambda_migration2 because of conflict in file text.txt in 2 branches with --force
+5.take.txt doesn't contain  changes from  feature/lambda_migration2 when I am  in dev
+6.Checkout back to the branch feature/lambda_migration2 will show I ve got no text.txt already.Force checkout lost my local changes from feature/lambda_migration2.
+
+# Reset
+
+1.git checkout reset_question
+
+2.
+
+   1.git reset --soft HEAD~1 Changes to be committed: New file:10.txt We just removed last commit  10 from HEAD but it stays in
+   index and working tree.
+   2.After git reset --mixed HEAD~1 Untracked files: 10.txt 	9.txt We removed another commit 9 from HEAD and index,also
+   removed  commit 10 from index so both 10.txt and  9.txt locate just in working tree
+   3.After git reset --hard HEAD~1  We see commit 7
+   4.Prompted to revert "6" commit   no change of 6 commit exists already
+3.HEAD~1 in reset says - every time undo changes in order to get 1 commit state before HEAD
+
+
+# Working with GitHub
+
+1.After creation of new repository on github url of this new on is available git@github.com:VictLitv2/gitTest.git
+2.git  remote  add origin git@github.com:VictLitv2/gitTest.git
+3.git branch -M main&&git push -u origin main
+4.git push -u origin dev
